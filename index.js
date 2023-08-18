@@ -1,8 +1,8 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 //WriteFile
-function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, err => {
+async function writeToFile(fileName, data) {
+     fs.writeFile(fileName, data, err => {
         if (err) {
             console.error('Error writing to file:', err);
         } else {
@@ -10,6 +10,7 @@ function writeToFile(fileName, data) {
         }
     });
 }
+
 //User Prompts
 async function getUserInputs() {
     const answers = await inquirer.prompt([
@@ -38,6 +39,7 @@ async function getUserInputs() {
             name: 'colorText',
         }
     ]);
+
 
     return answers;
 }
@@ -73,8 +75,9 @@ async function constructorFunc(userInput) {
 }
     const fileName = 'logo.SVG'
     writeToFile(fileName, SVG_Content);
-}
+    return SVG_Content;
 
+}
 //Main Func
 async function init (){
 
@@ -106,3 +109,5 @@ async function init (){
 }}
 
 init();
+
+module.exports = constructorFunc;
